@@ -28,7 +28,7 @@ public class CLCSSlow {
 		return arr[m][n];
 	}
 
-	private static int getLCS(){
+	private static int getCLCS(){
 		int maxLCSLen=0;
 		for(int k=0;k<A.length;k++){
 			int LCSLen =  LCS(cut(A,k),B);
@@ -46,7 +46,7 @@ public class CLCSSlow {
 		for (int tc = 0; tc < T; tc++) {
 			A = s.next().toCharArray();
 			B = s.next().toCharArray();
-			System.out.println(getLCS());
+			System.out.println(getCLCS());
 		}
 	}
 

@@ -5,6 +5,11 @@ public class LCS {
   static int[][] arr = new int[2048][2048];
   static char[] A, B;
 
+
+  static void printLCStable(int[][] arr) {
+    System.out.println(Arrays.toString(arr));  
+  }
+  
   static int LCS() {
     int m = A.length, n = B.length;
     int i, j;
@@ -18,6 +23,7 @@ public class LCS {
       }
     }
     
+    printLCStable(arr);
     return arr[m][n];
   }
 

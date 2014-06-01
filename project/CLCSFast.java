@@ -36,7 +36,7 @@ public class CLCSFast {
 	
 	private static Path singleShortestPath(int startIndex, Path lowerPath, Path upperPath){
 		int m = A.length, n = B.length;
-		char[] cutA = cut(A,startIndex);
+		char [] cutA = cut(A,startIndex);
 		
 	    int i, j;
 	    for (i = 0; i <= m; i++) arr[i][0] = 0;
@@ -74,6 +74,7 @@ public class CLCSFast {
 	    }
 	    
 	    if(LCS < arr[m][n]) LCS = arr[m][n];
+	    //System.out.println(LCS);
 	    
 	    Path shortestPath = new Path(m+1);
 	    shortestPath.boundary[m].lowerBoundValue = n;
@@ -100,14 +101,13 @@ public class CLCSFast {
 	    		shortestPath.boundary[i].upperBoundValue = j;
 	    	}
 	    }
-	    
 	    return shortestPath;
 	}
 
 
 	private static void findShortestPaths(Path lowerPath, Path upperPath){
-		if(upperPath.startIndex-lowerPath.startIndex <= 1) return;
-		int midIndex = (upperPath.startIndex-lowerPath.startIndex)/2;
+		if(lowerPath.startIndex-upperPath.startIndex <= 1) return;
+		int midIndex = (lowerPath.startIndex+upperPath.startIndex)/2;
 		Path newPath = singleShortestPath(midIndex,lowerPath,upperPath);
 		findShortestPaths(lowerPath,newPath);
 		findShortestPaths(newPath,upperPath);
@@ -133,6 +133,8 @@ public class CLCSFast {
 			newPathLo.startIndex = A.length;
 			Path newPathHi = singleShortestPath(0,lowerPath,upperPath);
 			newPathHi.startIndex = 0;
+			
+			//System.out.println("hurray!");
 
 			findShortestPaths(newPathLo,newPathHi);
 			System.out.println(LCS);

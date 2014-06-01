@@ -32,7 +32,7 @@ public class LCS {
       }
     }
     
-    printLCStable(arr,m,n);
+    //printLCStable(arr,m,n);
     return arr[m][n];
   }
 

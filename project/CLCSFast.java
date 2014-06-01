@@ -29,13 +29,13 @@ public class CLCSFast {
 	}
 
 
-	private static int findShortestPaths(int upperIndex,int lowerIndex,BoundElement[] lowerBounds, BoundElement[] upperBounds){
+	private static int findShortestPaths(int lowerIndex,int upperIndex,BoundElement[] lowerBounds, BoundElement[] upperBounds){
 		if(upperIndex-lowerIndex<=1)return LCS;
 		int midIndex = (upperIndex-lowerIndex)/2;
-		
-		
 		BoundElement[] newBounds = singleShortestPath(upperIndex,lowerBounds,upperBounds);
-		System.arraycopy(newBounds, 0, dest, destPos, length);
+		findShortestPaths(lowerIndex,midIndex,lowerBounds,newBounds);
+		findShortestPaths(midIndex,upperIndex,newBounds,upperBounds);
+		
 	}
 
 	public static void main(String[] args) {
@@ -46,17 +46,23 @@ public class CLCSFast {
 			A = s.next().toCharArray();
 			B = s.next().toCharArray();
 			LCS=0;
-			BoundElement[] upperBounds = new BoundElement[A.length*2];
+			BoundElement[] upperBounds = new BoundElement[A.length];
+			
 			Arrays.fill(upperBounds,A.length);
-			BoundElement[] lowerBounds = new BoundElement[A.length*2];
+			
+			BoundElement[] lowerBounds = new BoundElement[A.length];
 			Arrays.fill(lowerBounds, 0);
 
+			for(int i=0;i<A.length;i++){
+				lowerBounds[i].lowerBoundValue=0;
+				lowerBounds[i].upperBoundValue=0;
+				upperBounds[i].lowerBoundValue=A.length;
+				upperBounds[i].upperBoundValue=A.length;
+			}
+			
 			BoundElement[] newBounds = singleShortestPath(0,lowerBounds,upperBounds);
 
-			System.arraycopy(newBounds, 0, lowerBounds, A.length, A.length);
-			System.arraycopy(newBounds, 0, upperBounds, 0, A.length);
-
-			System.out.println(findShortestPaths(0,A.length,lowerBounds,upperBounds));
+			System.out.println(findShortestPaths(0,A.length,newBounds,newBounds));
 
 		}
 	}

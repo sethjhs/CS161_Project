@@ -3,13 +3,12 @@ import java.util.Scanner;
 
 
 public class CLCSFast {
-	class BoundElement{
-		public int upperBoundValue;
-		public int lowerBoundValue;
-	}
+
 	static int[][] arr = new int[2048][2048];
 	static char[] A, B;
 	static int LCS;
+
+
 
 	private static BoundElement[] singleShortestPath(int startIndex, BoundElement[] lowerBounds, BoundElement[] upperBounds){
 		int m = A.length, n = B.length;
@@ -51,13 +50,25 @@ public class CLCSFast {
 	}
 
 
-	private static int findShortestPaths(int lowerIndex,int upperIndex,BoundElement[] lowerBounds, BoundElement[] upperBounds){
+	private static int findShortestPaths(int lowerIndex,int upperIndex,Path lowerBounds, Path upperBounds){
 		if(upperIndex-lowerIndex<=1)return LCS;
 		int midIndex = (upperIndex-lowerIndex)/2;
 		BoundElement[] newBounds = singleShortestPath(midIndex,lowerBounds,upperBounds);
 		findShortestPaths(lowerIndex,midIndex,lowerBounds,newBounds);
 		findShortestPaths(midIndex,upperIndex,newBounds,upperBounds);
 		
+	}
+	
+	public bool isInBounds(int frameStart, int row, int col, Path upperBound,Path lowerBound){
+		///////IN PROGRESS////////
+		return
+			row>=frameStart&& //test frame bottom
+			row<=frameStart+A.length&& //test frame top
+			(frameStart+upperBound.startIndex<=A.length||
+			col<=upperBound.boundry[upperBound.startIndex+row].upperBoundValue
+					)
+			&&
+			(col<=lowerBound.boundry[lowerBound.startIndex]
 	}
 
 	public static void main(String[] args) {
@@ -68,17 +79,18 @@ public class CLCSFast {
 			A = s.next().toCharArray();
 			B = s.next().toCharArray();
 			LCS=0;
-			BoundElement[] upperBounds = new BoundElement[A.length];
-			BoundElement[] lowerBounds = new BoundElement[A.length];
+			
+			Path upper = new Path(A.length+1);
+			Path lower = new Path(A.length+1);
+			
+			
 
 			for(int i=0;i<A.length;i++){
-				lowerBounds[i].lowerBoundValue=0;
-				lowerBounds[i].upperBoundValue=0;
-				upperBounds[i].lowerBoundValue=B.length;
-				upperBounds[i].upperBoundValue=B.length;
+				upper.boundry[i].lowerBoundValue=B.length;
+				upper.boundry[i].upperBoundValue=B.length;
 			}
 			
-			BoundElement[] newBounds = singleShortestPath(0,lowerBounds,upperBounds);
+			Path newBounds = singleShortestPath(0,lower,upper);
 
 			System.out.println(findShortestPaths(0,A.length,newBounds,newBounds));
 

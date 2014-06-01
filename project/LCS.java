@@ -15,7 +15,7 @@ public class LCS {
     }
     
     for(int i = 0; i < DParr.length; i++) {
-      System.out.println(Arrays.toString(arr[i]));  
+      System.out.println(Arrays.toString(DParr[i]));  
     }
   }
   

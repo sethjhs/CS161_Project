@@ -12,6 +12,7 @@ public class Path {
 	public Path(int m) {
 		boundary = new BoundElement[m];
 		for(int i =0;i<m;i++){
+			boundary[i]=new BoundElement();
 			boundary[i].lowerBoundValue=0;
 			boundary[i].upperBoundValue=0;
 			startIndex=0;

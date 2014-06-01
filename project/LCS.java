@@ -16,7 +16,6 @@ public class LCS {
     
     for(int i = 0; i < DParr.length; i++) {
       System.out.println(Arrays.toString(DParr[i]));  
-      System.out.println("hi");
     }
   }
   
@@ -33,6 +32,14 @@ public class LCS {
       }
     }
     
+    BoundElement[A.length]
+    
+    i = 0;
+    j = 0;
+    int val;
+    while(i > 0 && j > 0) {
+    	in
+    }
     //printLCStable(arr,m,n);
     return arr[m][n];
   }

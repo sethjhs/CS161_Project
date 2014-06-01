@@ -2,13 +2,18 @@
 
 public class Path {
 	public int startIndex;
-	public BoundElement[] boundry;
+	public BoundElement[] boundary;
+	
+	class BoundElement{
+		public int upperBoundValue;
+		public int lowerBoundValue;
+	}
 	
 	public Path(int m) {
-		boundry = new BoundElement[m];
+		boundary = new BoundElement[m];
 		for(int i =0;i<m;i++){
-			boundry[i].lowerBoundValue=0;
-			boundry[i].upperBoundValue=0;
+			boundary[i].lowerBoundValue=0;
+			boundary[i].upperBoundValue=0;
 			startIndex=0;
 		}
 		
